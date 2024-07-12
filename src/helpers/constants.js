@@ -1,1 +1,9 @@
-export const { PORT = 3000, SALT_ROUNDS = 10 } = process.env;
+export const {
+  PORT = 3000,
+  SALT_ROUNDS = 10,
+  DB_HOST = 'localhost',
+  DB_USER = 'postgres',
+  DB_PORT = 5432,
+  DB_PASSWORD = '1234',
+  DB_DATABASE = 'prueba-tecnica',
+} = process.env;

@@ -1,11 +1,18 @@
 import pg from 'pg';
+import {
+  DB_DATABASE,
+  DB_HOST,
+  DB_PASSWORD,
+  DB_PORT,
+  DB_USER,
+} from '../helpers/constants.js';
 
 const CONFIG_CONNECTION = {
-  host: process.env.DB_HOST || 'localhost',
-  user: process.env.DB_USER || 'postgres',
-  port: process.env.DB_PORT || 5432,
-  password: process.env.DB_PASSWORD || '1234',
-  database: process.env.DB_DATABASE || 'prueba-tecnica',
+  host: DB_HOST,
+  user: DB_USER,
+  port: DB_PORT,
+  password: DB_PASSWORD,
+  database: DB_DATABASE,
 };
 
 export const CONNECTION_DB = new pg.Pool(CONFIG_CONNECTION);
