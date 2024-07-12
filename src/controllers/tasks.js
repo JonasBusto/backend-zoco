@@ -1,3 +1,5 @@
+import { validateTask } from '../schemas/tasks.js';
+
 export class TaskController {
   constructor({ taskModel }) {
     this.taskModel = taskModel;
@@ -15,17 +17,34 @@ export class TaskController {
   };
 
   create = async (req, res) => {
-    const object = req.body;
+    const result = validateTask(req.body);
 
-    const newObject = await this.taskModel.create({ object });
+    if (!result.success) {
+      return res.status(400).json({
+        error: JSON.parse(result.error.message),
+      });
+    }
+
+    const newObject = await this.taskModel.create({
+      object: result.data,
+    });
     res.status(201).json(newObject);
   };
 
   update = async (req, res) => {
     const { id } = req.params;
-    const object = req.body;
+    const result = validateTask(req.body);
 
-    const updateObject = await this.taskModel.update({ object, id });
+    if (!result.success) {
+      return res.status(400).json({
+        error: JSON.parse(result.error.message),
+      });
+    }
+
+    const updateObject = await this.taskModel.update({
+      object: result.data,
+      id,
+    });
 
     if (!updateObject) {
       return res.status(404).json({ message: 'Tarea no encontrada' });
