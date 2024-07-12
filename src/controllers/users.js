@@ -27,7 +27,7 @@ export class UserController {
       });
     }
 
-    const salt = await bcrypt.genSalt(SALT_ROUNDS);
+    const salt = await bcrypt.genSalt(Number(SALT_ROUNDS));
     const passwordHash = await bcrypt.hash(result.data.password, salt);
 
     const newObject = await this.userModel.register({

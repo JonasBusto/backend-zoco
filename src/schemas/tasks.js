@@ -11,10 +11,18 @@ const taskSchema = zod.object({
     invalid_type_error: 'La descripción debe ser un string',
     required_error: 'Descripción es requerido',
   }),
+  creation: zod
+    .string({
+      invalid_type_error: 'La fecha de creación debe ser un string',
+      required_error: 'Fecha de creación es requerido',
+    })
+    .date({
+      invalid_type_error: 'El formato de fecha debe ser DD-MM-AAAA',
+    }),
   expiration: zod
     .string({
-      invalid_type_error: 'La fecha debe ser un string',
-      required_error: 'Fecha es requerido',
+      invalid_type_error: 'La fecha de expiración debe ser un string',
+      required_error: 'Fecha de expiración es requerido',
     })
     .date({
       invalid_type_error: 'El formato de fecha debe ser DD-MM-AAAA',

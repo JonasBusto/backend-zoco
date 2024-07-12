@@ -17,12 +17,12 @@ export class TaskModel {
   }
 
   static async create({ object }) {
-    const { title, description, expiration, status } = object;
+    const { title, description, creation, expiration, status } = object;
 
     try {
       await CONNECTION_DB.query(
-        'INSERT INTO task (title, description, expiration, status) VALUES ($1, $2, $3, $4)',
-        [title, description, expiration, status]
+        'INSERT INTO task (title, description, creation, expiration, status) VALUES ($1, $2, $3, $4, $5)',
+        [title, description, creation, expiration, status]
       );
     } catch (error) {
       throw new Error('Error al crear tarea');

@@ -5,5 +5,5 @@ export const {
   DB_USER = 'postgres',
   DB_PORT = 5432,
   DB_PASSWORD = '1234',
-  DB_DATABASE = 'prueba-tecnica',
+  DB_DATABASE = 'backend-zoco',
 } = process.env;
