@@ -30,18 +30,18 @@ export class UserController {
     const salt = await bcrypt.genSalt(SALT_ROUNDS);
     const passwordHash = await bcrypt.hash(result.data.password, salt);
 
-    const newUser = await this.userModel.register({
+    const newObject = await this.userModel.register({
       object: { ...result.data, password: passwordHash },
     });
 
-    if (!newUser) {
+    if (!newObject) {
       return res.status(400).json({
         error:
           'Error al crear el usuario. Nombre de usuario o email ya existente',
       });
     }
 
-    res.status(201).json(newUser);
+    res.status(201).json(newObject);
   };
 
   login = async (req, res) => {
@@ -73,5 +73,39 @@ export class UserController {
     }
 
     res.status(201).json(userLogin);
+  };
+
+  update = async (req, res) => {
+    const { id } = req.params;
+    const result = validatePartialUser(req.body);
+
+    if (!result.success) {
+      return res.status(400).json({
+        error: JSON.parse(result.error.message),
+      });
+    }
+
+    const updateObject = await this.userModel.update({
+      object: result.data,
+      id,
+    });
+
+    if (!updateObject) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+
+    res.status(201).json(updateObject);
+  };
+
+  delete = async (req, res) => {
+    const { id } = req.params;
+
+    const deleteObject = await this.userModel.delete({ id });
+
+    if (!deleteObject) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+
+    return res.json({ message: 'Usuario eliminado' });
   };
 }

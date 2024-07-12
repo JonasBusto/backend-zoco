@@ -52,4 +52,48 @@ export class UserModel {
 
     return rows[0] ? rows[0] : null;
   }
+
+  static async update({ object, id }) {
+    const { username, email, role } = object;
+
+    const { rows } = await CONNECTION_DB.query(
+      'SELECT * FROM users WHERE id = $1',
+      [id]
+    );
+
+    if (!rows[0]) null;
+
+    try {
+      await CONNECTION_DB.query(
+        'UPDATE users SET username = COALESCE($1, username), email = COALESCE($2, email), role = COALESCE($3, role) WHERE id = $4',
+        [username, email, role, id]
+      );
+    } catch (error) {
+      throw new Error('Error al actualizar tarea');
+    }
+
+    const checkUpdate = await CONNECTION_DB.query(
+      'SELECT * FROM users WHERE id = $1',
+      [id]
+    );
+
+    return checkUpdate.rows[0];
+  }
+
+  static async delete({ id }) {
+    const { rows } = await CONNECTION_DB.query(
+      'SELECT * FROM users WHERE id = $1',
+      [id]
+    );
+
+    if (!rows[0]) return false;
+
+    try {
+      await CONNECTION_DB.query('DELETE FROM users WHERE id = $1', [id]);
+    } catch (error) {
+      throw new Error('Error al eliminar usuario');
+    }
+
+    return true;
+  }
 }

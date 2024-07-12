@@ -10,6 +10,8 @@ export const userRouter = ({ userModel }) => {
   usersRouter.get('/:id', userController.getById);
   usersRouter.post('/', userController.register);
   usersRouter.post('/login', userController.login);
+  usersRouter.put('/:id', userController.update);
+  usersRouter.delete('/:id', userController.delete);
 
   return usersRouter;
 };
