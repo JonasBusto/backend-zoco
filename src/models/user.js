@@ -69,7 +69,7 @@ export class UserModel {
         [username, email, role, id]
       );
     } catch (error) {
-      throw new Error('Error al actualizar tarea');
+      throw new Error('Error al actualizar usuario');
     }
 
     const checkUpdate = await CONNECTION_DB.query(
