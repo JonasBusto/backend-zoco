@@ -1,5 +1,6 @@
 import { validatePartialUser, validateUser } from '../schemas/users.js';
 import { SALT_ROUNDS } from '../helpers/constants.js';
+import { tokenSign } from '../middlewares/generateToken.js';
 import bcrypt from 'bcryptjs';
 
 export class UserController {
@@ -72,7 +73,8 @@ export class UserController {
       });
     }
 
-    res.status(201).json(userLogin);
+    const tokenSession = await tokenSign(userLogin);
+    res.status(201).json({ user: userLogin, token: tokenSession });
   };
 
   update = async (req, res) => {

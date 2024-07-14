@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { TaskController } from '../controllers/tasks.js';
+import { checkRoleAuth, checkAuth } from '../middlewares/auth.js';
 
 export const taskRouter = ({ taskModel }) => {
   const tasksRouter = Router();
@@ -8,9 +9,24 @@ export const taskRouter = ({ taskModel }) => {
 
   tasksRouter.get('/', taskController.getAll);
   tasksRouter.get('/:id', taskController.getById);
-  tasksRouter.post('/', taskController.create);
-  tasksRouter.put('/:id', taskController.update);
-  tasksRouter.delete('/:id', taskController.delete);
+  tasksRouter.post(
+    '/',
+    checkAuth,
+    checkRoleAuth(['admin', 'user']),
+    taskController.create
+  );
+  tasksRouter.put(
+    '/:id',
+    checkAuth,
+    checkRoleAuth(['admin', 'user']),
+    taskController.update
+  );
+  tasksRouter.delete(
+    '/:id',
+    checkAuth,
+    checkRoleAuth(['admin']),
+    taskController.delete
+  );
 
   return tasksRouter;
 };

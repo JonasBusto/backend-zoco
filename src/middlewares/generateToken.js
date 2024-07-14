@@ -1,0 +1,24 @@
+import jwt from 'jsonwebtoken';
+
+export const tokenSign = async (user) => {
+  const { id, role } = user;
+  return jwt.sign(
+    {
+      id,
+      role,
+    },
+    process.env.JWT_SECRET
+  );
+};
+
+export const verifyToken = async (token) => {
+  try {
+    return jwt.verify(token, process.env.JWT_SECRET);
+  } catch (error) {
+    return res.status(400).json({ error: 'No puede realizar esta acción' });
+  }
+};
+
+export const decodeSign = (token) => {
+  return jwt.decode(token, null);
+};
