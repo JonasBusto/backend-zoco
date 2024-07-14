@@ -61,7 +61,15 @@ export class UserModel {
       [id]
     );
 
-    if (!rows[0]) null;
+    if (!rows[0]) return { founded: false, repeated: false };
+
+    const checkRepeated = await CONNECTION_DB.query(
+      'SELECT * FROM users WHERE LOWER(username) = LOWER($1) OR LOWER(email) = LOWER($2)',
+      [username, email]
+    );
+
+    if (checkRepeated.rows[0].id !== Number(id))
+      return { founded: true, repeated: true };
 
     try {
       await CONNECTION_DB.query(

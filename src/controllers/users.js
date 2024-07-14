@@ -90,8 +90,14 @@ export class UserController {
       id,
     });
 
-    if (!updateObject) {
+    if (updateObject.founded === false && updateObject.repeated === false) {
       return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+
+    if (updateObject.founded && updateObject.repeated) {
+      return res
+        .status(400)
+        .json({ message: 'Nombre de usuario o email ya existente' });
     }
 
     res.status(201).json(updateObject);
