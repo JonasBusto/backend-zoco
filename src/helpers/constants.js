@@ -6,4 +6,5 @@ export const {
   DB_PORT = 5432,
   DB_PASSWORD = '1234',
   DB_DATABASE = 'backend-zoco',
+  JWT_SECRET = 'backend-zoco-jwt-secret',
 } = process.env;
