@@ -2,7 +2,9 @@ import { CONNECTION_DB } from '../database/config.js';
 
 export class TaskModel {
   static async getAll() {
-    const { rows } = await CONNECTION_DB.query('SELECT * FROM task');
+    const { rows } = await CONNECTION_DB.query(
+      'SELECT * FROM task ORDER BY id ASC'
+    );
 
     return rows;
   }

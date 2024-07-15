@@ -2,7 +2,9 @@ import { CONNECTION_DB } from '../database/config.js';
 
 export class UserModel {
   static async getAll() {
-    const { rows } = await CONNECTION_DB.query('SELECT * FROM users');
+    const { rows } = await CONNECTION_DB.query(
+      'SELECT * FROM users ORDER BY id ASC'
+    );
 
     return rows;
   }
