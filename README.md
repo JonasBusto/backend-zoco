@@ -56,7 +56,8 @@ npm install
 4. En la ruta /src/database, ejecutar las queries del archivo queries.sql.
 5. Configurar variables de entorno local:
    **DB_HOST** - **DB_USER** - **DB_PORT** - **DB_PASSWORD** - **DB_DATABASE** - **SALT_ROUNDS** - **JWT_SECRET**
-6. Ejecutar el proyecto:
+6. Quitar o comentar la linea 11 de /src/config.js referido a SSL para que funcione localmente, ya que no hace falta porque la información no viaja por internet. En el deploy si, por seguridad debe estar activo.
+7. Ejecutar el proyecto:
 
 ```sh
 npm run dev
