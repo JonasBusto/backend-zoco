@@ -37,7 +37,7 @@ Para usuarios:
 
 El backend permite hacer un CRUD de
 
-- **Tareas (Tasks):** A exception el metodo GET (De todos los productos o filtrar por ID), los demas metodos como POST, PUT y DELETE estan protejidos por un token. El token debe ser de un usuario con rol _administrador_ para poder usar dichos metodos.
+- **Tareas (Tasks):** A exception el metodo GET (De todos las tareas o filtrar por ID), los demas metodos como POST, PUT y DELETE estan protejidos por un token. El token debe ser de un usuario con rol _administrador_ para poder usar dichos metodos.
 
 - **Usuarios (Users):** Se puede hacer un GET de todos los usuarios o filtrar por ID. Ademas, se puede hacer un login o registro. Los demas metodos como PUT y DELETE estan protejidos por un token. Las contraseñas se encriptan. En el login se genera el token para poder acceder a las rutas restringidas.
 
