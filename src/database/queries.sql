@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS task
     CONSTRAINT task_pkey PRIMARY KEY (id)
 )
 
-CREATE TABLE IF NOT EXISTS public.users
+CREATE TABLE IF NOT EXISTS users
 (
     id SERIAL NOT NULL,
     username character varying(100) NOT NULL,
