@@ -8,6 +8,7 @@ import {
 } from '../helpers/constants.js';
 
 const CONFIG_CONNECTION = {
+  ssl: true,
   host: DB_HOST,
   user: DB_USER,
   port: DB_PORT,
